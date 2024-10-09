@@ -1,0 +1,31 @@
+CREATE TABLE Usuarios (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20),
+    endereco VARCHAR(255),
+    data_nascimento DATE,
+    experiencia_profissional TEXT,
+    escolaridade VARCHAR(100),
+    curriculo TEXT
+);
+
+CREATE TABLE Vagas (
+    id_vaga INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    descricao TEXT NOT NULL,
+    requisitos TEXT,
+    localizacao VARCHAR(100),
+    salario DECIMAL(10, 2)
+);
+
+CREATE TABLE Inscricoes (
+    id_inscricao INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT,
+    id_vaga INT,
+    data_inscricao DATE,
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
+    FOREIGN KEY (id_vaga) REFERENCES Vagas(id_vaga),
+    UNIQUE (id_usuario, id_vaga)
+);
